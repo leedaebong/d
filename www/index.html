@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>じゃんけんぽい</title>
+  <script language="javascript">
+ 
+  var count = 0;
+    var win = 0;
+    var lose = 0;
+    var eq = 0;
+ 
+   function GamePlay(player1) {
+    var f = document.getElementById("game");
+    f.result.value = "";
+    f.player2.value = "";
+    items = new Array("けん", "じゃん", "ぽ");
+    winner = new Array("勝ちました.", "負けました", "引き分けです");
+    var ran1 = "";
+var ran2_img="";
+   
+    if(player1 == "けん") {
+     ran1 = 0;
+     count++;
+    } else if(player1 == "じゃん") {
+     ran1 = 1;
+     count++;
+    } else if(player1 == "ぽい") {
+     ran1 = 2;
+     count++;
+    } else {
+     f.result.value = "가위,바위,보를 입력해주세요。";
+     return;
+    }
+    ran2 = parseInt(Math.random() * 3);
+    f.player2.value = items[ran2];
+if (ran2 == 0) {ran2_img="chi.png"; }
+if (ran2 == 1) {ran2_img="muk.png"; }
+if (ran2 == 2) {ran2_img="pa.png"; }
+document.getElementById("player2").src=ran2_img;
+    if(ran1 == 0 && ran2 == 2 || ran1 == 1 && ran2 == 0 || ran1 == 2 && ran2 == 1)
+    {
+     win++;
+     f.result.value = winner[0];
+    } else if(ran1 == 0 && ran2 == 1 || ran1 == 1 && ran2 == 2 || ran1 == 2 && ran2 == 0) {
+     lose++;
+     f.result.value = winner[1] ;
+    } else {
+     eq++;
+     f.result.value = winner[2]
+    }
+   
+    var sc= "ゲームの回数: " + count + "== 勝 : " + win + " 負: " + lose + " 引き分け: " + eq;
+    var score = document.getElementById("score");
+    score.innerHTML = sc;
+   
+   
+   }
+  </script>
+ </head>
+ <body>
+  <h1>じゃんけんぽい</h1>
+ 
+  <form id="game">
+   俺 :
+   <div>
+<ul>
+<li><a href="javascript:GamePlay('けん')"><img src="chi.png"></a></li>
+<li><a href="javascript:GamePlay('じゃん')"><img src="muk.png"></a></li>
+<li><a href="javascript:GamePlay('ぽい')"><img src="pa.png"></a></li>
+</ul>
+
+   ＡＩ :
+    <input type="text" size="3" name="player2" readonly style="width:100pt">
+   <div>
+   <li><img src="AI.gif" id="player2"></li>
+   </div>
+ 
+   <p>
+    スコア:<span id="score"></span><br>
+    結果 :
+    <input type="text" size="10" name="result" style="width:230pt" readonly="readonly">
+  </form>
+ </body>
+</html>
